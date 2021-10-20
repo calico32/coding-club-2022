@@ -1,0 +1,12 @@
+[package]
+name = "valid-numbers"
+version = "1.0.0"
+authors = ["wiisportsresort <devdoge1@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+rustyline = "8.2.0"
+colored = "2.0.0"
+
+# [build]
+# target = ["x86_64-pc-windows-gnu", "x86_64-unknown-linux-gnu", "x86_64-apple-darwin"]
