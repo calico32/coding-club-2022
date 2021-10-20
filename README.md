@@ -1,4 +1,4 @@
-# coding challeneges 2022
+# coding challenges 2022
 
 monorepo
 
