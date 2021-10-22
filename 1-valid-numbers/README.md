@@ -4,7 +4,7 @@ a rust program
 
 ## downloads
 
-See [Releases](https://github.com/wiisportsresort/coding-club-2022/releases/tag/valid-numbers%401.0.0)
+See [Releases](https://github.com/wiisportsresort/coding-club-2022/releases)
 
 ## building yourself (and installing)
 
