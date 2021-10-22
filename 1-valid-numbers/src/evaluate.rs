@@ -37,26 +37,22 @@ pub fn evaluate_number(str: &str) -> EvaluateResult {
   }
 
   // last 2 chars as a str
-  let last2 = str.split_at(str.len() - 2).1;
+  let (start, last2) = str.split_at(str.len() - 2);
 
   // that but a u32
   let num_last2 = last2.parse::<u32>().unwrap();
 
-  // sum of the last 2 digits
-  let sum_last2 = last2.chars().map(|s| s.to_digit(10).unwrap()).sum::<u32>();
+  // sum of the first 8 digits
+  let sum_start = start.chars().map(|s| s.to_digit(10).unwrap()).sum::<u32>();
 
-  // sum of all the digits
-  let sum_all = str.chars().map(|s| s.to_digit(10).unwrap()).sum::<u32>();
-
-  // if sum of all the digits is equal to the last 2 digits as a number + sum of the last 2 digits
-  let is_valid = sum_all == num_last2 + sum_last2;
+  // if sum of the first 8 digits is equal to the last 2 digits as a number
+  let is_valid = sum_start == num_last2;
 
   let formatted_result = format!(
-    "{} {} {} + {}",
-    sum_all.to_string(),
+    "{} {} {}",
+    sum_start.to_string(),
     if is_valid { "==" } else { "!=" },
     num_last2,
-    sum_last2
   )
   .dimmed();
 
