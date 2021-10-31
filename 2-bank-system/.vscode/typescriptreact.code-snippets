@@ -1,0 +1,59 @@
+{
+  "React void function component": {
+    "prefix": "rvfc",
+    "description": "React void function component",
+    "body": [
+      "import React from 'react';",
+      "",
+      "interface ${TM_FILENAME_BASE}Props {",
+      "\t$1",
+      "}",
+      "",
+      "const $TM_FILENAME_BASE: React.VFC<${TM_FILENAME_BASE}Props> = ({}) => {",
+      "\treturn (",
+      "\t\t$0",
+      "\t);",
+      "};",
+      "",
+      "export default ${TM_FILENAME_BASE};"
+    ]
+  },
+  "React function component": {
+    "prefix": "rfc",
+    "description": "React function component",
+    "body": [
+      "import React from 'react';",
+      "",
+      "interface ${TM_FILENAME_BASE}Props {",
+      "\t$1",
+      "}",
+      "",
+      "const $TM_FILENAME_BASE: React.FC<${TM_FILENAME_BASE}Props> = ({ children }) => {",
+      "\treturn (",
+      "\t\t$0",
+      "\t);",
+      "};",
+      "",
+      "export default $TM_FILENAME_BASE;"
+    ]
+  },
+
+  "Next.js page": {
+    "prefix": "np",
+    "description": "Next.js page",
+    "body": [
+      "import type { NextPage } from 'next';",
+      "import React from 'react';",
+      "",
+      "const $TM_FILENAME_BASE: NextPage = () => {",
+      "\treturn (",
+      "\t\t<>",
+      "\t\t\t$0",
+      "\t\t</>",
+      "\t);",
+      "};",
+      "",
+      "export default ${TM_FILENAME_BASE};"
+    ]
+  }
+}

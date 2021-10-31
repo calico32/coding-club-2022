@@ -1,0 +1,12 @@
+.next
+node_modules
+.git
+.gitignore
+.vscode
+.env
+.prettierrc.json
+.yarn/cache
+.yarn/sdks
+.yarn/install-state.gz
+Dockerfile
+.docker-compose.*

@@ -1,0 +1,7 @@
+{
+  "extends": ["next/core-web-vitals", "@blueprintjs/eslint-config"],
+  "plugins": ["@blueprintjs"],
+  "rules": {
+    "header/header": "off"
+  }
+}
