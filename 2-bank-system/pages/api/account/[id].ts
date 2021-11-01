@@ -32,10 +32,6 @@ export default handler
       },
     });
 
-    if (!account) {
-      res.status(404).json({ message: 'Account not found' });
-    }
-
     res.status(200).json({ account });
   })
   .patch(async (req, res) => {

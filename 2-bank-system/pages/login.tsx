@@ -3,7 +3,7 @@ import { Formik, FormikHelpers } from 'formik';
 import { NextPage } from 'next';
 import Link from 'next/link';
 import Router, { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React from 'react';
 import AppBar from '../components/AppBar';
 import BlueprintFormGroup from '../components/BlueprintFormGroup';
 import { requireUnauthenticated } from '../lib/auth';
@@ -23,8 +23,6 @@ const Login: NextPage = () => {
   const from = router.query.from?.toString() ?? '';
   const fromProtected = from.startsWith('dashboard') || from.startsWith('account');
 
-  const [isSubmitting, setSubmitting] = useState(false);
-
   const validate = ({ username, password }: LoginValues) => {
     const errors: Partial<LoginValues> = {};
 
@@ -40,11 +38,8 @@ const Login: NextPage = () => {
 
   const login = async (
     { username, password }: LoginValues,
-    formikHelpers: FormikHelpers<LoginValues>
+    { setSubmitting }: FormikHelpers<LoginValues>
   ) => {
-    if (isSubmitting) return;
-    setSubmitting(true);
-
     const response = await fetch('/api/login', {
       method: 'POST',
       body: JSON.stringify({ username, password }),
@@ -52,15 +47,22 @@ const Login: NextPage = () => {
     });
 
     if (response.ok) {
-      Router.push(from ? `/${from}` : '/dashboard');
+      const useFrom = from && (from.startsWith('account') || from.startsWith('dashboard'));
+      Router.push(useFrom ? `/${from}` : '/dashboard');
       toaster.show({
         message: 'Successfully logged in.',
         intent: 'success',
         icon: 'tick',
       });
+      setSubmitting(false);
     } else {
-      const { error } = await response.json();
-      formikHelpers.setErrors({ username: error });
+      const { message } = await response.json();
+      toaster.show({
+        message,
+        intent: 'danger',
+        icon: 'error',
+      });
+      setSubmitting(false);
     }
   };
 
@@ -92,8 +94,7 @@ const Login: NextPage = () => {
                 />
                 <div className="flex">
                   <Button
-                    disabled={isSubmitting}
-                    loading={isSubmitting}
+                    loading={props.isSubmitting}
                     type="submit"
                     form="login"
                     text="Login"

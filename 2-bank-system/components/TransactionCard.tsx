@@ -1,6 +1,5 @@
 import { Card, Classes, Colors, H2, H3, HTMLDivProps, Icon, Text } from '@blueprintjs/core';
 import { Transaction } from '@prisma/client';
-import Router from 'next/router';
 import React from 'react';
 import styles from '../styles/util.module.scss';
 
@@ -31,8 +30,6 @@ const TransactionCard: React.VFC<TransactionCardProps> = props => {
       className={`flex items-center justify-between w-full p-2 ${
         skeleton ? Classes.SKELETON : ''
       } ${className}`}
-      interactive
-      onClick={() => Router.push(`/account/${transaction.id}`)}
       {...otherProps}
     >
       <div className="flex flex-col">

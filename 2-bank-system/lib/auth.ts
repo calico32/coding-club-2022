@@ -30,7 +30,7 @@ const nextSession = () => {
     _nextSession = nextSessionFactory({
       cookie: {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
+        // secure: process.env.NODE_ENV === 'production',
         maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
         sameSite: 'lax',
       },
@@ -69,12 +69,11 @@ const requireAuth =
     const session = await getSession(req, res);
 
     if (!!session.userId !== desiredState) {
-      const url = new URL(req.url!, `http://${req.headers.host}`);
+      const url = new URL(req.url!);
 
       const from = encodeURIComponent(url.pathname.replace(/^\//, ''));
 
       return {
-        props: redirectProps ?? {},
         redirect: {
           statusCode: 302,
           destination: redirect ?? `${desiredState ? '/login' : '/dashboard'}?from=${from}`,

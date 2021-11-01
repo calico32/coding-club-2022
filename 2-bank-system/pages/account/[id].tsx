@@ -111,53 +111,54 @@ const AccountPage: NextPage = () => {
                 account={account}
               />
             </div>
+            <div className="mt-6">
+              <div className="flex items-center justify-between mb-1">
+                <H2 className={transactionsLoadingClass}>Transactions</H2>
+
+                <div className="flex items-center">
+                  <Button
+                    className={transactionsLoadingClass}
+                    intent="success"
+                    icon="add"
+                    text="Create transaction"
+                    onClick={() => setCreateTransactionDialogOpen(true)}
+                  />
+                  <CreateTransactionDialog
+                    open={createTransactionDialogOpen}
+                    setOpen={setCreateTransactionDialogOpen}
+                    account={account!}
+                    callback={() => {
+                      mutate();
+                      mutateTransactions();
+                    }}
+                  />
+                </div>
+              </div>
+              <div className="flex flex-wrap">
+                {transactionsLoadingClass ? (
+                  <>
+                    <TransactionCard skeleton className="mb-3" />
+                    <TransactionCard skeleton className="mb-3" />
+                    <TransactionCard skeleton className="mb-3" />
+                    <TransactionCard skeleton className="mb-3" />
+                  </>
+                ) : (
+                  [...transactions]
+                    .sort(
+                      (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+                    )
+                    .map(transaction => (
+                      <TransactionCard
+                        key={transaction.id}
+                        transaction={transaction}
+                        className="mb-3"
+                      />
+                    ))
+                )}
+              </div>
+            </div>
           </>
         )}
-
-        <div className="mt-6">
-          <div className="flex items-center justify-between mb-1">
-            <H2 className={transactionsLoadingClass}>Transactions</H2>
-
-            <div className="flex items-center">
-              <Button
-                className={transactionsLoadingClass}
-                intent="success"
-                icon="add"
-                text="Create transaction"
-                onClick={() => setCreateTransactionDialogOpen(true)}
-              />
-              <CreateTransactionDialog
-                open={createTransactionDialogOpen}
-                setOpen={setCreateTransactionDialogOpen}
-                account={account!}
-                callback={() => {
-                  mutate();
-                  mutateTransactions();
-                }}
-              />
-            </div>
-          </div>
-          <div className="flex flex-wrap">
-            {transactionsLoadingClass ? (
-              <>
-                <TransactionCard skeleton className="mb-3" />
-                <TransactionCard skeleton className="mb-3" />
-                <TransactionCard skeleton className="mb-3" />
-                <TransactionCard skeleton className="mb-3" />
-              </>
-            ) : (
-              [...transactions]
-                .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-                .map(transaction => (
-                  <TransactionCard
-                    key={transaction.id}
-                    transaction={transaction}
-                    className="mb-3"
-                  />
-                ))
-            )}
-          </div>
-        </div>
       </Wrapper>
     </>
   );
