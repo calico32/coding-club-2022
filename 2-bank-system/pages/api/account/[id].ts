@@ -154,6 +154,9 @@ export default handler
         return res.status(404).json({ message: 'Account not found' });
       }
 
+      // delete all transactions on this account
+      await prisma.transaction.deleteMany({ where: { accountId: account.id } });
+
       // delete the account
       await prisma.account.delete({ where: { id: req.query.id!.toString() } });
 
