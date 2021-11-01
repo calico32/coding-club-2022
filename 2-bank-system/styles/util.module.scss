@@ -1,5 +1,9 @@
 @import '~@blueprintjs/core/lib/scss/variables';
 
+.muted {
+  color: $pt-text-color-muted;
+}
+
 .nonIdealState {
   height: calc(100vh - $pt-navbar-height);
 }

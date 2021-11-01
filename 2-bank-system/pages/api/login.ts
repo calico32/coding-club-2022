@@ -26,6 +26,6 @@ export default handler.use(session).post(async (req, res) => {
 
     return res.json(user);
   } catch (err) {
-    return res.status(500).json(err);
+    return res.status(500).json({ message: err.message });
   }
 });

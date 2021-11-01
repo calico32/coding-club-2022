@@ -3,24 +3,38 @@ import Link from 'next/link';
 import Router from 'next/router';
 import React from 'react';
 import { useUser } from '../lib/hooks';
+import { useToaster } from '../lib/toaster';
 import Wrapper from './Wrapper';
 
 const AppBar: () => JSX.Element = () => {
-  const { user, loggedOut, loading } = useUser();
+  const toaster = useToaster();
+  const { user, loggedOut, loading, mutate } = useUser();
+
+  const [isLoggingOut, setIsLoggingOut] = React.useState(false);
 
   const logout = async () => {
-    await fetch('/api/logout', {
-      method: 'POST',
+    setIsLoggingOut(true);
+
+    await fetch('/api/logout', { method: 'POST' });
+
+    await Router.push('/');
+
+    mutate();
+
+    toaster.show({
+      message: 'Successfully logged out.',
+      intent: 'success',
+      icon: 'tick',
     });
 
-    Router.replace('/');
+    setIsLoggingOut(false);
   };
 
   return (
     <Navbar className="px-0">
       <Wrapper width="1024px">
         <Navbar.Group align="left">
-          <Link href="/">
+          <Link href={loggedOut ? '/' : '/dashboard'}>
             <a className="flex items-center no-underline hover:text-current">
               <Icon icon="credit-card" size={20} className="mr-2"></Icon>
               <Navbar.Heading className="text-lg font-bold no-underline">dogebank</Navbar.Heading>
@@ -40,7 +54,13 @@ const AppBar: () => JSX.Element = () => {
               <Text className="mr-4">
                 Logged in as <b>{user.name}</b>
               </Text>
-              <Button text="Logout" rightIcon="log-out" intent="danger" onClick={logout} />
+              <Button
+                loading={isLoggingOut}
+                text="Logout"
+                rightIcon="log-out"
+                intent="danger"
+                onClick={logout}
+              />
             </>
           ) : (
             <>

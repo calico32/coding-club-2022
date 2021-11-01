@@ -1,4 +1,4 @@
-import { Account, User } from '@prisma/client';
+import type { Account, Transaction, User } from '@prisma/client';
 import useSWR from 'swr';
 
 const fetcher = async (url: string) => {
@@ -55,6 +55,24 @@ export const useAccount = (id: string) => {
   return {
     loading,
     account,
+    mutate,
+  };
+};
+
+type TransactionsResponse = Response & { transactions: Transaction[] };
+
+export const useTransactions = (accountId: string) => {
+  const { data, error, mutate } = useSWR<TransactionsResponse, ErrorResponse>(
+    `/api/transactions/${accountId}`,
+    fetcher
+  );
+
+  const loading = !data && !error;
+  const transactions = data?.transactions ?? [];
+
+  return {
+    loading,
+    transactions,
     mutate,
   };
 };

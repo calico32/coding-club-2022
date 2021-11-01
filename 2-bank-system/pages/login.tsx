@@ -1,11 +1,13 @@
-import { Button, Callout, Card, H1 } from '@blueprintjs/core';
+import { AnchorButton, Button, Callout, Card, H1 } from '@blueprintjs/core';
 import { Formik, FormikHelpers } from 'formik';
 import { NextPage } from 'next';
+import Link from 'next/link';
 import Router, { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import AppBar from '../components/AppBar';
 import BlueprintFormGroup from '../components/BlueprintFormGroup';
 import { requireUnauthenticated } from '../lib/auth';
+import { useToaster } from '../lib/toaster';
 
 interface LoginValues {
   username: string;
@@ -16,6 +18,7 @@ export const getServerSideProps = requireUnauthenticated();
 
 const Login: NextPage = () => {
   const router = useRouter();
+  const toaster = useToaster();
 
   const from = router.query.from?.toString() ?? '';
   const fromProtected = from.startsWith('dashboard') || from.startsWith('account');
@@ -49,7 +52,12 @@ const Login: NextPage = () => {
     });
 
     if (response.ok) {
-      Router.push(`/${from}` ?? '/dashboard');
+      Router.push(from ? `/${from}` : '/dashboard');
+      toaster.show({
+        message: 'Successfully logged in.',
+        intent: 'success',
+        icon: 'tick',
+      });
     } else {
       const { error } = await response.json();
       formikHelpers.setErrors({ username: error });
@@ -90,14 +98,11 @@ const Login: NextPage = () => {
                     form="login"
                     text="Login"
                     intent="primary"
-                    className="max-w-min"
+                    className="mr-2 max-w-min"
                   />
-                  <Button
-                    text="Register"
-                    className="max-w-min"
-                    minimal
-                    onClick={() => Router.push('/register')}
-                  />
+                  <Link href="/register" passHref>
+                    <AnchorButton text="Register" className="max-w-min" minimal />
+                  </Link>
                 </div>
               </form>
             )}

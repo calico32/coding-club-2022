@@ -14,28 +14,32 @@ export default handler
     const user = await prisma.user.findFirst({ where: { id: req.session.userId } });
 
     if (!user) {
-      req.session.destroy();
+      await req.session.destroy();
       return res.status(401).json({ message: 'Unauthorized' });
     }
 
+    // check if name is empty
     if (!name) {
-      return res.status(400).json({ message: 'name is required' });
+      return res.status(400).json({ message: 'Name is required.' });
     }
 
-    if (name.length > 100) {
-      return res.status(400).json({ message: 'name is too long' });
+    // check if name is 3 to 100 characters
+    if (name.length < 3 || name.length > 100) {
+      return res.status(400).json({ message: 'Name must be 3 to 100 characters.' });
     }
 
-    if (description.length > 100) {
-      return res.status(400).json({ message: 'description is too long' });
+    // check if description is over 500 characters
+    if (description && description.length > 500) {
+      return res.status(400).json({ message: 'Description must be less than 500 characters.' });
     }
 
     try {
+      // create new account
       const account = await prisma.account.create({
         data: {
           name,
           description,
-          user: { connect: user },
+          user: { connect: { id: user.id } },
         },
       });
 

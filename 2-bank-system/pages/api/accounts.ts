@@ -12,17 +12,18 @@ export default handler
     const user = await prisma.user.findFirst({ where: { id: req.session.userId } });
 
     if (!user) {
-      req.session.destroy();
+      await req.session.destroy();
       return res.status(401).json({ message: 'Unauthorized' });
     }
 
     const accounts = await prisma.account.findMany({
       where: { userId: user.id },
       select: {
-        createdAt: false,
+        createdAt: true,
+        updatedAt: true,
         user: false,
         userId: false,
-        transactions: false,
+        transactions: true,
         balance: true,
         name: true,
         id: true,

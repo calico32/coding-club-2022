@@ -1,4 +1,4 @@
-import { FormGroup } from '@blueprintjs/core';
+import { FormGroup, IconName, Intent } from '@blueprintjs/core';
 import { FormikProps } from 'formik';
 import React from 'react';
 import BlueprintField from './BlueprintField';
@@ -13,6 +13,10 @@ interface BlueprintFormGroupProps<T> {
   inline?: boolean;
   helperText?: string;
   type?: string;
+  textarea?: boolean;
+  numeric?: boolean;
+  leftIcon?: IconName;
+  intent?: Intent;
 }
 
 function BlueprintFormGroup<T>({
@@ -24,6 +28,10 @@ function BlueprintFormGroup<T>({
   inline,
   helperText,
   type,
+  textarea,
+  numeric,
+  leftIcon,
+  intent,
   props: { touched, errors, handleBlur, handleChange },
 }: BlueprintFormGroupProps<T>) {
   return (
@@ -45,6 +53,10 @@ function BlueprintFormGroup<T>({
         type={type}
         name={property.toString()}
         placeholder={placeholder}
+        textarea={textarea}
+        numeric={numeric}
+        leftIcon={leftIcon}
+        intent={intent}
       />
     </FormGroup>
   );

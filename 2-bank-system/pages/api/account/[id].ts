@@ -14,12 +14,22 @@ export default handler
     const user = await prisma.user.findFirst({ where: { id: req.session.userId } });
 
     if (!user) {
-      req.session.destroy();
+      await req.session.destroy();
       return res.status(401).json({ message: 'Unauthorized' });
     }
 
     const account = await prisma.account.findFirst({
       where: { id: id.toString(), userId: user.id },
+      select: {
+        createdAt: true,
+        id: true,
+        name: true,
+        userId: true,
+        updatedAt: true,
+        balance: true,
+        description: true,
+        transactions: true,
+      },
     });
 
     if (!account) {
@@ -32,7 +42,7 @@ export default handler
     const user = await prisma.user.findFirst({ where: { id: req.session.userId } });
 
     if (!user) {
-      req.session.destroy();
+      await req.session.destroy();
       return res.status(401).json({ message: 'Unauthorized' });
     }
 
@@ -53,11 +63,26 @@ export default handler
       return res.status(404).json({ message: 'Account not found' });
     }
 
+    // check if name exists and is between 3 and 100 characters
+    if (name && (name.length < 3 || name.length > 100)) {
+      return res.status(400).json({ message: 'Name must be between 3 and 100 characters' });
+    }
+
+    // check if description is over 500 characters
+    if (description && description.length > 500) {
+      return res.status(400).json({ message: 'Description must be less than 500 characters' });
+    }
+
     // update the account
     try {
       const updatedAccount = await prisma.account.update({
         where: { id: id!.toString() },
-        data: { name, description },
+        data: {
+          name: (name ?? account.name).toString().trim(),
+          description: ((description === '' ? null : description) ?? account.description)
+            .toString()
+            .trim(),
+        },
       });
 
       res.status(200).json({ account: updatedAccount });
@@ -69,7 +94,7 @@ export default handler
     const user = await prisma.user.findFirst({ where: { id: req.session.userId } });
 
     if (!user) {
-      req.session.destroy();
+      await req.session.destroy();
       return res.status(401).json({ message: 'Unauthorized' });
     }
 
@@ -85,12 +110,17 @@ export default handler
       return res.status(404).json({ message: 'Account not found' });
     }
 
+    // check if description is over 100 characters
+    if (description && description.length > 100) {
+      return res.status(400).json({ message: 'Description must be less than 100 characters' });
+    }
+
     // create transaction
     try {
       const transaction = await prisma.transaction.create({
         data: {
           accountId: account.id,
-          description,
+          description: description ?? (amount > 0 ? 'Deposit' : 'Withdrawal'),
           amount,
         },
       });
@@ -113,7 +143,7 @@ export default handler
     const user = await prisma.user.findFirst({ where: { id: req.session.userId } });
 
     if (!user) {
-      req.session.destroy();
+      await req.session.destroy();
       return res.status(401).json({ message: 'Unauthorized' });
     }
 

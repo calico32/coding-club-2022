@@ -14,7 +14,7 @@ export default handler
     const user = await prisma.user.findFirst({ where: { id: req.session.userId } });
 
     if (!user) {
-      req.session.destroy();
+      await req.session.destroy();
       return res.status(401).json({ message: 'Unauthorized' });
     }
 

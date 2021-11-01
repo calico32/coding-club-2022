@@ -1,6 +1,6 @@
-import { Button, Classes, H1 } from '@blueprintjs/core';
+import { AnchorButton, Button, Classes, H1 } from '@blueprintjs/core';
 import type { NextPage } from 'next';
-import Router from 'next/router';
+import Link from 'next/link';
 import React from 'react';
 import AppBar from '../components/AppBar';
 import Wrapper from '../components/Wrapper';
@@ -19,25 +19,17 @@ const Index: NextPage = () => {
           {loading ? (
             <Button text="Go to dashboard" disabled className={Classes.SKELETON} />
           ) : user ? (
-            <Button
-              text="Go to dashboard"
-              intent="primary"
-              onClick={() => Router.push('/dashboard')}
-            />
+            <Link href="/dashboard" passHref>
+              <AnchorButton text="Go to dashboard" intent="primary" />
+            </Link>
           ) : (
             <div className="flex">
-              <Button
-                text="Login"
-                intent="primary"
-                className="mr-2"
-                onClick={() => Router.push('/login')}
-              />
-              <Button
-                text="Register"
-                intent="primary"
-                outlined
-                onClick={() => Router.push('/register')}
-              />
+              <Link href="/login" passHref>
+                <AnchorButton text="Login" intent="primary" className="mr-2" />
+              </Link>
+              <Link href="/register" passHref>
+                <AnchorButton text="Register" intent="primary" outlined />
+              </Link>
             </div>
           )}
         </section>
