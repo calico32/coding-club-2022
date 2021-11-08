@@ -1,12 +1,13 @@
 import { AnchorButton, Button, Classes, Icon, Navbar, Text } from '@blueprintjs/core';
 import Link from 'next/link';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { useUser } from '../lib/hooks';
 import { useToaster } from '../lib/toaster';
 import Wrapper from './Wrapper';
 
 const AppBar: () => JSX.Element = () => {
+  const router = useRouter();
   const toaster = useToaster();
   const { user, loggedOut, loading, mutate } = useUser();
 
@@ -17,7 +18,7 @@ const AppBar: () => JSX.Element = () => {
 
     await fetch('/api/logout', { method: 'POST' });
 
-    await Router.push('/');
+    await router.push('/');
 
     mutate();
 

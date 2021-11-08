@@ -16,7 +16,7 @@ export const useUser = () => {
   const { data, error, mutate } = useSWR<UserResponse, ErrorResponse>('/api/user', fetcher);
 
   const loading = !data && !error;
-  const loggedOut = !data?.user && !error;
+  const loggedOut = data && !data?.user && !error;
 
   return {
     loading,

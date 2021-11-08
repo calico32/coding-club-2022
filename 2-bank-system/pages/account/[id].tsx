@@ -10,29 +10,43 @@ import {
   Text,
 } from '@blueprintjs/core';
 import type { NextPage } from 'next';
-import Router, { useRouter } from 'next/router';
-import React from 'react';
+import { useRouter } from 'next/router';
+import React, { useEffect } from 'react';
 import AppBar from '../../components/AppBar';
 import CreateTransactionDialog from '../../components/CreateTransactionDialog';
 import DeleteBankAccountAlert from '../../components/DeleteBankAccountAlert';
 import EditBankAccountDialog from '../../components/EditBankAccountDialog';
+import Loading from '../../components/Loading';
 import TransactionCard from '../../components/TransactionCard';
 import Wrapper from '../../components/Wrapper';
-import { requireAuthenticated } from '../../lib/auth';
-import { useAccount, useTransactions } from '../../lib/hooks';
+import { useAccount, useTransactions, useUser } from '../../lib/hooks';
 import styles from '../../styles/util.module.scss';
-
-export const getServerSideProps = requireAuthenticated();
 
 const AccountPage: NextPage = () => {
   const router = useRouter();
   const { id } = router.query;
-  const { account, loading, mutate } = useAccount(id!.toString());
+  const { loggedOut, loading } = useUser();
+  const { account, loading: accountLoading, mutate } = useAccount(id!.toString());
   const {
     transactions,
     loading: transactionsLoading,
     mutate: mutateTransactions,
   } = useTransactions(id!.toString());
+
+  useEffect(() => {
+    if (loggedOut)
+      router.replace({
+        pathname: '/login',
+        query: { from: router.asPath },
+      });
+  }, [loggedOut]);
+
+  if (loggedOut)
+    return (
+      <Wrapper>
+        <Spinner />
+      </Wrapper>
+    );
 
   const [editAccountDialogOpen, setEditAccountDialogOpen] = React.useState(false);
   const [deleteAccountDialogOpen, setDeleteAccountDialogOpen] = React.useState(false);
@@ -40,11 +54,13 @@ const AccountPage: NextPage = () => {
 
   const transactionsLoadingClass = transactionsLoading ? Classes.SKELETON : '';
 
-  return (
+  return loading ? (
+    <Loading />
+  ) : (
     <>
       <AppBar />
       <Wrapper>
-        {loading ? (
+        {accountLoading ? (
           <NonIdealState className={styles.nonIdealState} icon={<Spinner />} />
         ) : !account ? (
           <NonIdealState
@@ -54,7 +70,7 @@ const AccountPage: NextPage = () => {
             action={
               <Button
                 icon="arrow-left"
-                onClick={() => Router.back()}
+                onClick={() => router.back()}
                 intent="primary"
                 text="Return"
               />

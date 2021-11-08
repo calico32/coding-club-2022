@@ -1,6 +1,6 @@
 import { Alert, Text } from '@blueprintjs/core';
 import { Account } from '@prisma/client';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { useToaster } from '../lib/toaster';
 
@@ -17,6 +17,7 @@ const DeleteBankAccountAlert: React.VFC<DeleteBankAccountAlertProps> = ({
   callback,
   account,
 }) => {
+  const router = useRouter();
   const toaster = useToaster();
   const [loading, setLoading] = React.useState(false);
 
@@ -44,7 +45,7 @@ const DeleteBankAccountAlert: React.VFC<DeleteBankAccountAlertProps> = ({
             timeout: 5000,
           });
           setOpen(false);
-          Router.push('/dashboard');
+          router.push('/dashboard');
           callback && callback();
         } catch (err) {
           toaster.show({

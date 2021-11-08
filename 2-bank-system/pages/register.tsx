@@ -1,11 +1,12 @@
 import { Button, Card, H1 } from '@blueprintjs/core';
 import { Formik, FormikHelpers } from 'formik';
 import type { NextPage } from 'next';
-import Router from 'next/router';
-import React, { useState } from 'react';
+import router from 'next/router';
+import React, { useEffect, useState } from 'react';
 import AppBar from '../components/AppBar';
 import BlueprintFormGroup from '../components/BlueprintFormGroup';
-import { requireUnauthenticated } from '../lib/auth';
+import Loading from '../components/Loading';
+import { useUser } from '../lib/hooks';
 
 interface RegisterValues {
   name: string;
@@ -14,10 +15,13 @@ interface RegisterValues {
   confirmPassword: string;
 }
 
-export const getServerSideProps = requireUnauthenticated();
-
 const register: NextPage = () => {
   const [isSubmitting, setSubmitting] = useState(false);
+  const { user, loggedOut, loading } = useUser();
+
+  useEffect(() => {
+    if (user && !loggedOut) router.replace('/dashboard');
+  }, [user, loggedOut]);
 
   const validate = async ({ name, username, password, confirmPassword }: RegisterValues) => {
     const errors: Partial<RegisterValues> = {};
@@ -65,7 +69,7 @@ const register: NextPage = () => {
     });
 
     if (response.ok) {
-      Router.push('/dashboard');
+      router.push('/dashboard');
     } else {
       const { message } = await response.json();
       formikHelpers.setErrors({ username: message });
@@ -79,7 +83,9 @@ const register: NextPage = () => {
     confirmPassword: '',
   };
 
-  return (
+  return loading ? (
+    <Loading />
+  ) : (
     <>
       <AppBar />
       <main className="mx-auto max-w-min">
@@ -128,7 +134,7 @@ const register: NextPage = () => {
                     text="Login"
                     className="max-w-min"
                     minimal
-                    onClick={() => Router.push('/login')}
+                    onClick={() => router.push('/login')}
                   />
                 </div>
               </form>

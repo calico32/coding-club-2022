@@ -2,18 +2,17 @@ import { Button, Classes, H1, H2, Icon, IconName, MenuItem, Text } from '@bluepr
 import { Select } from '@blueprintjs/select';
 import type { Account } from '@prisma/client';
 import type { NextPage } from 'next';
-import React from 'react';
+import { useRouter } from 'next/router';
+import React, { useEffect } from 'react';
 import AppBar from '../components/AppBar';
 import BankAccountCard from '../components/BankAccountCard';
 import CreateBankAccountDialog from '../components/CreateBankAccountDialog';
 import DeleteUserAccountAlert from '../components/DeleteUserAccountAlert';
 import EditUserAccountDialog from '../components/EditUserAccountDialog';
+import Loading from '../components/Loading';
 import Wrapper from '../components/Wrapper';
-import { requireAuthenticated } from '../lib/auth';
 import { useAccounts, useUser } from '../lib/hooks';
 import styles from '../styles/util.module.scss';
-
-export const getServerSideProps = requireAuthenticated();
 
 class Sort {
   constructor(
@@ -52,8 +51,17 @@ const sorts = {
 const SortSelect = Select.ofType<[key: string, sort: Sort]>();
 
 const dashboard: NextPage = () => {
-  const { loading, user, mutate } = useUser();
+  const router = useRouter();
+  const { loading, user, mutate, loggedOut } = useUser();
   const { loading: accountsLoading, accounts } = useAccounts();
+
+  useEffect(() => {
+    if (loggedOut)
+      router.replace({
+        pathname: '/login',
+        query: { from: router.asPath },
+      });
+  }, [loggedOut]);
 
   const [sort, setSort] = React.useState<keyof typeof sorts>('latest');
 
@@ -64,7 +72,9 @@ const dashboard: NextPage = () => {
   const userLoadingClass = loading ? Classes.SKELETON : '';
   const accountsLoadingClass = accountsLoading ? Classes.SKELETON : '';
 
-  return (
+  return loading ? (
+    <Loading />
+  ) : (
     <>
       <AppBar />
       <Wrapper>

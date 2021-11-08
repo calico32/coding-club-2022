@@ -1,6 +1,6 @@
 import { Card, Classes, Colors, H2, H3, HTMLDivProps, Icon, Text } from '@blueprintjs/core';
 import { Account } from '@prisma/client';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 import React from 'react';
 import styles from '../styles/util.module.scss';
 
@@ -11,6 +11,7 @@ const isSkeleton = (props: AccountCardProps): props is { skeleton: true } => {
 };
 
 const AccountCard: React.VFC<AccountCardProps> = props => {
+  const router = useRouter();
   const skeleton = isSkeleton(props);
   const account: Account = skeleton
     ? {
@@ -33,7 +34,7 @@ const AccountCard: React.VFC<AccountCardProps> = props => {
         skeleton ? Classes.SKELETON : ''
       } ${className}`}
       interactive
-      onClick={() => Router.push(`/account/${account.id}`)}
+      onClick={() => router.push(`/account/${account.id}`)}
       {...otherProps}
     >
       <div className="flex flex-col">

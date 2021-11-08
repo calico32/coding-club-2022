@@ -1,6 +1,5 @@
 import type { IncomingMessage, NextFunction } from 'connect';
 import { ServerResponse } from 'http';
-import { GetServerSideProps } from 'next';
 import { Session } from 'next-session/lib/types';
 import { ApiRequest, ApiResponse, CustomSession } from './types';
 
@@ -52,56 +51,3 @@ export const session = async (req: ApiRequest, res: ApiResponse, next: NextFunct
   await nextSession()(req, res);
   next();
 };
-
-const requireAuth =
-  ({
-    desiredState,
-    redirect,
-    continueProps,
-    redirectProps,
-  }: {
-    desiredState: boolean;
-    redirect?: string;
-    continueProps?: { [key: string]: any };
-    redirectProps?: { [key: string]: any };
-  }): GetServerSideProps =>
-  async ({ req, res }) => {
-    const session = await getSession(req, res);
-
-    if (!!session.userId !== desiredState) {
-      const url = new URL(req.url!);
-
-      const from = encodeURIComponent(url.pathname.replace(/^\//, ''));
-
-      return {
-        redirect: {
-          statusCode: 302,
-          destination: redirect ?? `${desiredState ? '/login' : '/dashboard'}?from=${from}`,
-        },
-      };
-    }
-
-    return { props: continueProps ?? {} };
-  };
-
-export const requireAuthenticated = <
-  C extends { [key: string]: any } = { [key: string]: any },
-  R extends { [key: string]: any } = { [key: string]: any }
->(
-  opts: {
-    redirect?: string;
-    continueProps?: C;
-    redirectProps?: R;
-  } = {}
-) => requireAuth({ desiredState: true, ...opts });
-
-export const requireUnauthenticated = <
-  C extends { [key: string]: any } = { [key: string]: any },
-  R extends { [key: string]: any } = { [key: string]: any }
->(
-  opts: {
-    redirect?: string;
-    continueProps?: C;
-    redirectProps?: R;
-  } = {}
-) => requireAuth({ desiredState: false, ...opts });

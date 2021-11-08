@@ -2,11 +2,12 @@ import { AnchorButton, Button, Callout, Card, H1 } from '@blueprintjs/core';
 import { Formik, FormikHelpers } from 'formik';
 import { NextPage } from 'next';
 import Link from 'next/link';
-import Router, { useRouter } from 'next/router';
-import React from 'react';
+import { useRouter } from 'next/router';
+import React, { useEffect } from 'react';
 import AppBar from '../components/AppBar';
 import BlueprintFormGroup from '../components/BlueprintFormGroup';
-import { requireUnauthenticated } from '../lib/auth';
+import Loading from '../components/Loading';
+import { useUser } from '../lib/hooks';
 import { useToaster } from '../lib/toaster';
 
 interface LoginValues {
@@ -14,11 +15,14 @@ interface LoginValues {
   password: string;
 }
 
-export const getServerSideProps = requireUnauthenticated();
-
 const Login: NextPage = () => {
   const router = useRouter();
   const toaster = useToaster();
+  const { user, loggedOut, loading } = useUser();
+
+  useEffect(() => {
+    if (user && !loggedOut) router.replace('/dashboard');
+  }, [user, loggedOut]);
 
   const from = router.query.from?.toString() ?? '';
   const fromProtected = from.startsWith('dashboard') || from.startsWith('account');
@@ -48,7 +52,7 @@ const Login: NextPage = () => {
 
     if (response.ok) {
       const useFrom = from && (from.startsWith('account') || from.startsWith('dashboard'));
-      Router.push(useFrom ? `/${from}` : '/dashboard');
+      router.push(useFrom ? `/${from}` : '/dashboard');
       toaster.show({
         message: 'Successfully logged in.',
         intent: 'success',
@@ -71,7 +75,9 @@ const Login: NextPage = () => {
     password: '',
   };
 
-  return (
+  return loading ? (
+    <Loading />
+  ) : (
     <>
       <AppBar />
       <main className="mx-auto max-w-min">

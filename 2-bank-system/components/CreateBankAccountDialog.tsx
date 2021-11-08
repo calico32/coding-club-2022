@@ -1,7 +1,7 @@
 import { Button, Classes, Dialog } from '@blueprintjs/core';
 import { Account } from '@prisma/client';
 import { Formik, FormikHelpers } from 'formik';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { useToaster } from '../lib/toaster';
 import BlueprintFormGroup from './BlueprintFormGroup';
@@ -18,6 +18,7 @@ interface CreateAccountValues {
 }
 
 const CreateAccountDialog: React.VFC<CreateAccountDialogProps> = ({ open, setOpen, callback }) => {
+  const router = useRouter();
   const toaster = useToaster();
 
   const editProfileInitialValues: CreateAccountValues = {
@@ -45,7 +46,7 @@ const CreateAccountDialog: React.VFC<CreateAccountDialogProps> = ({ open, setOpe
     if (response.ok) {
       const account: Account = (await response.json()).account;
       setOpen(false);
-      Router.push(`/account/${account.id}`);
+      router.push(`/account/${account.id}`);
       toaster.show({ message: 'Account created', intent: 'success', icon: 'tick' });
       callback && callback(account);
     } else {
