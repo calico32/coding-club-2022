@@ -1,7 +1,7 @@
 import { Alert, Text } from '@blueprintjs/core';
 import { Account } from '@prisma/client';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 import { useToaster } from '../lib/toaster';
 
 interface DeleteBankAccountAlertProps {
@@ -19,7 +19,7 @@ const DeleteBankAccountAlert: React.VFC<DeleteBankAccountAlertProps> = ({
 }) => {
   const router = useRouter();
   const toaster = useToaster();
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = useState(false);
 
   return (
     <Alert

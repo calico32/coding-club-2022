@@ -1,8 +1,10 @@
-import { Card, Classes, Colors, H2, H3, HTMLDivProps, Icon, Text } from '@blueprintjs/core';
+import { Card, Classes, H3, HTMLDivProps, Icon, Text } from '@blueprintjs/core';
 import { Account } from '@prisma/client';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { balanceColor } from '../lib/util';
 import styles from '../styles/util.module.scss';
+import DollarAmount from './DollarAmount';
 
 type AccountCardProps = HTMLDivProps & ({ account: Account } | { skeleton: true });
 
@@ -30,7 +32,7 @@ const AccountCard: React.VFC<AccountCardProps> = props => {
   return (
     <Card
       key={account.id}
-      className={`flex items-center justify-between w-full p-2 ${
+      className={`flex md:items-center md:justify-between w-full p-2 flex-col md:flex-row items-stretch ${
         skeleton ? Classes.SKELETON : ''
       } ${className}`}
       interactive
@@ -40,23 +42,20 @@ const AccountCard: React.VFC<AccountCardProps> = props => {
       <div className="flex flex-col">
         <div className="flex items-center">
           <Icon icon="folder-open" size={24} className="mr-2" />
-          <div className="flex items-baseline">
+          <div className="flex flex-col items-baseline md:flex-row">
             <H3 className="mb-0 mr-2">{account.name}</H3>
-            <Text className={`mb-0 text-sm ${styles.muted}`}>{account.id}</Text>
+            <Text className={`mb-0 text-xs md:text-sm ${styles.muted}`}>{account.id}</Text>
           </div>
         </div>
         {account.description && <Text className={`mb-0 mt-1`}>{account.description}</Text>}
       </div>
-      <div className="flex items-center">
-        <H2
-          className="mb-0"
-          style={{
-            color:
-              account.balance > 0 ? Colors.GREEN3 : account.balance < 0 ? Colors.RED3 : undefined,
-          }}
+      <div className="flex justify-end">
+        <Text
+          className="items-end mb-0 text-2xl font-semibold text-right md:text-3xl"
+          style={{ color: balanceColor(account.balance) }}
         >
-          {account.balance < 0 && '-'}${Math.abs(account.balance).toFixed(2)}
-        </H2>
+          <DollarAmount amount={account.balance} />
+        </Text>
       </div>
     </Card>
   );

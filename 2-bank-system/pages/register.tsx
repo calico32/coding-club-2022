@@ -29,6 +29,10 @@ const register: NextPage = () => {
     if (!name) {
       errors.name = 'Name is required';
     }
+    if (name && name.length < 3 && name.length > 100) {
+      errors.name = 'Name must be between 3 and 100 characters';
+    }
+
     if (!username) {
       errors.username = 'Username is required';
     }
@@ -99,7 +103,12 @@ const register: NextPage = () => {
           >
             {props => (
               <form onSubmit={props.handleSubmit} className="flex flex-col" id="register">
-                <BlueprintFormGroup props={props} property="name" label="Full name" />
+                <BlueprintFormGroup
+                  props={props}
+                  property="name"
+                  label="Full name"
+                  labelInfo="3-100 characters"
+                />
                 <BlueprintFormGroup
                   props={props}
                   property="username"

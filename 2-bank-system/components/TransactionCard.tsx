@@ -1,7 +1,9 @@
-import { Card, Classes, Colors, H2, H3, HTMLDivProps, Icon, Text } from '@blueprintjs/core';
+import { Card, Classes, H2, H3, HTMLDivProps, Icon, Text } from '@blueprintjs/core';
 import { Transaction } from '@prisma/client';
 import React from 'react';
+import { balanceColor } from '../lib/util';
 import styles from '../styles/util.module.scss';
+import DollarAmount from './DollarAmount';
 
 type TransactionCardProps = HTMLDivProps & ({ transaction: Transaction } | { skeleton: true });
 
@@ -27,7 +29,7 @@ const TransactionCard: React.VFC<TransactionCardProps> = props => {
   return (
     <Card
       key={transaction.id}
-      className={`flex items-center justify-between w-full p-2 ${
+      className={`flex md:items-center justify-between w-full md:flex-row flex-col items-stretch p-2 ${
         skeleton ? Classes.SKELETON : ''
       } ${className}`}
       {...otherProps}
@@ -44,14 +46,9 @@ const TransactionCard: React.VFC<TransactionCardProps> = props => {
           {new Date(transaction.createdAt).toLocaleString()}
         </Text>
       </div>
-      <div className="flex items-center">
-        <H2
-          className="mb-0"
-          style={{
-            color: transaction.amount > 0 ? Colors.GREEN3 : Colors.RED3,
-          }}
-        >
-          {transaction.amount < 0 && '-'}${Math.abs(transaction.amount).toFixed(2)}
+      <div className="flex items-center justify-end mt-2 md:mt-0">
+        <H2 className="mb-0" style={{ color: balanceColor(transaction.amount) }}>
+          <DollarAmount amount={transaction.amount} />
         </H2>
       </div>
     </Card>

@@ -1,26 +1,20 @@
-import {
-  Button,
-  Classes,
-  Colors,
-  H1,
-  H2,
-  Icon,
-  NonIdealState,
-  Spinner,
-  Text,
-} from '@blueprintjs/core';
-import type { NextPage } from 'next';
+import { Button, Classes, H1, H2, Icon, NonIdealState, Spinner, Text } from '@blueprintjs/core';
+import type { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import AppBar from '../../components/AppBar';
 import CreateTransactionDialog from '../../components/CreateTransactionDialog';
 import DeleteBankAccountAlert from '../../components/DeleteBankAccountAlert';
+import DollarAmount from '../../components/DollarAmount';
 import EditBankAccountDialog from '../../components/EditBankAccountDialog';
 import Loading from '../../components/Loading';
 import TransactionCard from '../../components/TransactionCard';
 import Wrapper from '../../components/Wrapper';
 import { useAccount, useTransactions, useUser } from '../../lib/hooks';
+import { balanceColor } from '../../lib/util';
 import styles from '../../styles/util.module.scss';
+
+export const getServerSideProps: GetServerSideProps = async () => ({ props: {} });
 
 const AccountPage: NextPage = () => {
   const router = useRouter();
@@ -48,9 +42,9 @@ const AccountPage: NextPage = () => {
       </Wrapper>
     );
 
-  const [editAccountDialogOpen, setEditAccountDialogOpen] = React.useState(false);
-  const [deleteAccountDialogOpen, setDeleteAccountDialogOpen] = React.useState(false);
-  const [createTransactionDialogOpen, setCreateTransactionDialogOpen] = React.useState(false);
+  const [editAccountDialogOpen, setEditAccountDialogOpen] = useState(false);
+  const [deleteAccountDialogOpen, setDeleteAccountDialogOpen] = useState(false);
+  const [createTransactionDialogOpen, setCreateTransactionDialogOpen] = useState(false);
 
   const transactionsLoadingClass = transactionsLoading ? Classes.SKELETON : '';
 
@@ -78,23 +72,13 @@ const AccountPage: NextPage = () => {
           />
         ) : (
           <>
-            <div className="flex items-center justify-between mt-4">
+            <div className="flex flex-col items-stretch justify-between mt-4 md:items-center md:flex-row">
               <div className="flex items-center">
                 <Icon icon="folder-open" className="mr-2" size={30} />
                 <H1 className="mb-0">{account.name}</H1>
               </div>
-              <H1
-                className="mb-0"
-                style={{
-                  color:
-                    account.balance > 0
-                      ? Colors.GREEN3
-                      : account.balance < 0
-                      ? Colors.RED3
-                      : undefined,
-                }}
-              >
-                {account.balance < 0 && '-'}${Math.abs(account.balance).toFixed(2)}
+              <H1 className="mb-0" style={{ color: balanceColor(account.balance) }}>
+                <DollarAmount amount={account.balance} />
               </H1>
             </div>
             <Text className={`${styles.muted} text-xs`}>ID: {account.id}</Text>

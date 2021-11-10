@@ -1,5 +1,5 @@
 import { Alert, Text } from '@blueprintjs/core';
-import React from 'react';
+import React, { useState } from 'react';
 import { useToaster } from '../lib/toaster';
 
 interface DeleteUserAccountAlertProps {
@@ -14,7 +14,7 @@ const DeleteUserAccountAlert: React.VFC<DeleteUserAccountAlertProps> = ({
   callback,
 }) => {
   const toaster = useToaster();
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = useState(false);
 
   return (
     <Alert

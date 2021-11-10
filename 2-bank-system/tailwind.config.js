@@ -140,6 +140,11 @@ module.exports = {
         danger: blueprintColors.red[3],
       },
     },
+    extend: {
+      fontFamily: {
+        sans: ['Inter var', 'sans-serif'],
+      },
+    },
   },
   variants: {
     extend: {},

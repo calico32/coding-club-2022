@@ -3,7 +3,7 @@ import { Select } from '@blueprintjs/select';
 import type { Account } from '@prisma/client';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import AppBar from '../components/AppBar';
 import BankAccountCard from '../components/BankAccountCard';
 import CreateBankAccountDialog from '../components/CreateBankAccountDialog';
@@ -63,11 +63,11 @@ const dashboard: NextPage = () => {
       });
   }, [loggedOut]);
 
-  const [sort, setSort] = React.useState<keyof typeof sorts>('latest');
+  const [sort, setSort] = useState<keyof typeof sorts>('latest');
 
-  const [editProfileDialogOpen, setEditProfileDialogOpen] = React.useState(false);
-  const [deleteAccountDialogOpen, setDeleteAccountDialogOpen] = React.useState(false);
-  const [createAccountDialogOpen, setCreateAccountDialogOpen] = React.useState(false);
+  const [editProfileDialogOpen, setEditProfileDialogOpen] = useState(false);
+  const [deleteAccountDialogOpen, setDeleteAccountDialogOpen] = useState(false);
+  const [createAccountDialogOpen, setCreateAccountDialogOpen] = useState(false);
 
   const userLoadingClass = loading ? Classes.SKELETON : '';
   const accountsLoadingClass = accountsLoading ? Classes.SKELETON : '';
@@ -118,12 +118,12 @@ const dashboard: NextPage = () => {
         </div>
 
         <div className="mt-6">
-          <div className="flex items-center justify-between mb-1">
-            <H2 className={accountsLoadingClass}>Accounts</H2>
+          <div className="flex flex-col items-stretch justify-between mb-1 md:items-center md:flex-row">
+            <H2 className={`${accountsLoadingClass} mb-1`}>Accounts</H2>
 
-            <div className="flex items-center">
+            <div className="flex flex-row-reverse justify-between mb-1 md:flex-row md:justify-start md:items-center md:mb-0">
               <SortSelect
-                className={`${accountsLoadingClass} mr-2`}
+                className={`${accountsLoadingClass} md:mr-2 mr-0`}
                 filterable={false}
                 items={Object.entries(sorts)}
                 itemRenderer={([key, sort]) => (
