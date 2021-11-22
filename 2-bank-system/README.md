@@ -4,7 +4,7 @@ a full-stack next.js application
 
 ## live demo
 
-coming soon
+<https://dogebank.wiisportsresorts.dev>
 
 ## running
 
