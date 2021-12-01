@@ -1,9 +1,23 @@
 import 'package:flutter/material.dart';
 
 class AppBarSubtitle extends StatelessWidget {
-  final String text;
+  final Widget? left;
+  final Widget? right;
 
-  const AppBarSubtitle({Key? key, required this.text}) : super(key: key);
+  const AppBarSubtitle({
+    Key? key,
+    this.left,
+    this.right,
+  }) : super(key: key);
+
+  // Widget _leftWidget(Widget? left) {
+  //   if (left is Text) {
+  //     return left
+  //       ..style!.color = Theme.of(context).colorScheme.onPrimary
+  //       ..style.fontSize = 24
+  //       ..style.fontWeight = FontWeight.w600;
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +39,37 @@ class AppBarSubtitle extends StatelessWidget {
               vertical: 8,
             ),
             color: Theme.of(context).colorScheme.primaryVariant,
-            child: Text(
-              text,
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.onPrimary,
-                fontSize: 24,
-                fontWeight: FontWeight.w600,
-              ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Flexible(
+                  flex: 1,
+                  child: DefaultTextStyle(
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onPrimary,
+                      fontSize: 24,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    child: left ?? Container(),
+                  ),
+                ),
+                if (right != null)
+                  Flexible(
+                    flex: 0,
+                    child: DefaultTextStyle(
+                      style: TextStyle(
+                        color: Theme.of(context)
+                            .colorScheme
+                            .onPrimary
+                            .withOpacity(0.9),
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      child: right ?? Container(),
+                    ),
+                  )
+              ],
             ),
           ),
         ),

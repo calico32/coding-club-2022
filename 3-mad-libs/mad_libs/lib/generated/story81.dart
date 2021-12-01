@@ -1,0 +1,58 @@
+//
+// Generated file. Do not edit.
+//
+
+// ignore_for_file: lines_longer_than_80_chars
+
+import '../story.dart';
+import '../text.dart';
+
+StoryBuilder story81 = StoryBuilder()
+  ..title("Boot to the Head (The Frantics)")
+  ..text("Yi yi yai yi.... \n\n")
+  ..word(WordType.pluralNoun)
+  ..text(" talking in ")
+  ..word(WordType.adjective)
+  ..text(" ")
+  ..word(WordType.pluralNoun)
+  ..text(", \n\"")
+  ..copy(-3)
+  ..text("\" ")
+  ..word(WordType.other, "verb ending in \"ing\"")
+  ..text(" in bed!\n\"")
+  ..copy(-5)
+  ..text("\" voting ")
+  ..word(WordType.adjective)
+  ..text(",\nGive them a ")
+  ..word(WordType.noun)
+  ..text(" to the head!\n\n\"")
+  ..copy(-1)
+  ..text("\" to the Head! Nah, nah...\n\"")
+  ..copy(-2)
+  ..text("\" to the Head! Nah, nah...\n\"")
+  ..copy(-3)
+  ..text("\" to the Head! Nah, nah...\n\"")
+  ..copy(-4)
+  ..text("\" to the Head! Nah nah nah... Nah. Nah nah nah...\n\n")
+  ..word(WordType.other, "occupation (plural)")
+  ..text(" who can't fix a ")
+  ..word(WordType.noun)
+  ..text(",\nPoliticians who can't ")
+  ..word(WordType.verb)
+  ..text("!\nThe ")
+  ..word(WordType.other, "occupation")
+  ..text(" who won't leave me ")
+  ..word(WordType.adjective)
+  ..text(",\nThe waiter who ")
+  ..word(WordType.other, "verb ending in \"ed\"")
+  ..text(" my drink!\n\nBoot to the ")
+  ..word(WordType.other, "body part")
+  ..text("! Nah, nah..\nBoot to the \"")
+  ..copy(-1)
+  ..text("\"! Nah, nah..\nBoot to the \"")
+  ..copy(-2)
+  ..text("\"! Nah, nah..\n\"")
+  ..copy(-14)
+  ..text("\"... TO... THE... \"")
+  ..copy(-4)
+  ..text("\"!!");

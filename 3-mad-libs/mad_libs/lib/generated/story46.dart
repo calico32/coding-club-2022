@@ -1,0 +1,56 @@
+//
+// Generated file. Do not edit.
+//
+
+// ignore_for_file: lines_longer_than_80_chars
+
+import '../story.dart';
+import '../text.dart';
+
+StoryBuilder story46 = StoryBuilder()
+  ..title("Shakespeare's Taming of the Shrew Part 2")
+  ..text("My ")
+  ..word(WordType.other, "animal")
+  ..text(" now is sharp and passing ")
+  ..word(WordType.adjective)
+  ..text(".\nAnd till she ")
+  ..word(WordType.verb)
+  ..text(" she must not be ")
+  ..word(WordType.adjective)
+  ..text("-gorg'd,\nFor then she never looks upon her ")
+  ..word(WordType.noun)
+  ..text(".\nAnother way I have to ")
+  ..word(WordType.verb)
+  ..text(" my haggard,\nTo make her come, and know her ")
+  ..word(WordType.other, "occupation")
+  ..text("'s call,\nThat is, to ")
+  ..word(WordType.verb)
+  ..text(" her, as we \"")
+  ..copy(-1)
+  ..text("\" these kites\nThat bate and beat, and will not be ")
+  ..word(WordType.adjective)
+  ..text(".\nShe eat no ")
+  ..word(WordType.noun)
+  ..text(" to-day, nor none shall eat;\nLast night she ")
+  ..word(WordType.other, "verb ending in \"ed\"")
+  ..text(" not, nor to-night she shall not;\nAs with the \"")
+  ..copy(-2)
+  ..text("\", some undeserved fault\nI'll find about the ")
+  ..word(WordType.other, "verb ending in \"ing\"")
+  ..text(" of the bed;\nAnd here I'll fling the pillow, there the ")
+  ..word(WordType.noun)
+  ..text(",\nThis way the ")
+  ..word(WordType.noun)
+  ..text(", another way the sheets;\nAy, and amid this hurly I intend\nThat all is done in reverend care of her-\nAnd, in conclusion, she shall \"")
+  ..copy(-9)
+  ..text("\" all night;\nAnd if she chance to nod I'll ")
+  ..word(WordType.verb)
+  ..text(" and ")
+  ..word(WordType.verb)
+  ..text("\nAnd with the clamour keep her still awake.\nThis is a way to kill a ")
+  ..word(WordType.noun)
+  ..text(" with kindness,\nAnd thus I'll curb her mad and ")
+  ..word(WordType.adjective)
+  ..text(" humour.\nHe that knows better how to tame a shrew,\nNow let him ")
+  ..word(WordType.verb)
+  ..text("; 'tis charity to show.");

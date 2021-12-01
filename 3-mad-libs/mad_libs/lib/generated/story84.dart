@@ -1,0 +1,56 @@
+//
+// Generated file. Do not edit.
+//
+
+// ignore_for_file: lines_longer_than_80_chars
+
+import '../story.dart';
+import '../text.dart';
+
+StoryBuilder story84 = StoryBuilder()
+  ..title("Like a ...... (Madonna)")
+  ..text("Like a/an ")
+  ..word(WordType.other, "occupation")
+  ..text("\n")
+  ..word(WordType.other, "verb ending in \"ed\"")
+  ..text(" for the ")
+  ..word(WordType.adjective)
+  ..text(" first time\nLike a/an \"")
+  ..copy(-3)
+  ..text("\"\nWhen your ")
+  ..word(WordType.other, "body part")
+  ..text(" beats\nNext to mine\n\nGonna give you all my ")
+  ..word(WordType.pluralNoun)
+  ..text(", boy\nMy fear is ")
+  ..word(WordType.other, "verb ending in \"ing\"")
+  ..text(" fast\nBeen ")
+  ..word(WordType.other, "verb ending in \"ing\"")
+  ..text(" it all for you\n'Cause only \"")
+  ..copy(-3)
+  ..text("\" can last\n\nYou're so ")
+  ..word(WordType.adjective)
+  ..text(" and you're mine\n")
+  ..word(WordType.verb)
+  ..text(" me strong, yeah you \"")
+  ..copy(-1)
+  ..text("\" me bold\nOh your \"")
+  ..copy(-7)
+  ..text("\" ")
+  ..word(WordType.other, "verb ending in \"ed\"")
+  ..text(" out\nYeah, your \"")
+  ..copy(-9)
+  ..text("\" \"")
+  ..copy(-2)
+  ..text("\" out\nWhat was scared and ")
+  ..word(WordType.adjective)
+  ..text("\n\nLike a/an \"")
+  ..copy(-17)
+  ..text("\"\n\"")
+  ..copy(-17)
+  ..text("\" for the ")
+  ..word(WordType.adjective)
+  ..text(" first time\nLike a/an \"")
+  ..copy(-20)
+  ..text("\"\nWhen your heart ")
+  ..word(WordType.other, "verb ending in \"s\"")
+  ..text("\nNext to mine");

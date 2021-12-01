@@ -1,0 +1,58 @@
+//
+// Generated file. Do not edit.
+//
+
+// ignore_for_file: lines_longer_than_80_chars
+
+import '../story.dart';
+import '../text.dart';
+
+StoryBuilder story139 = StoryBuilder()
+  ..title("The Busy Bumble Bee")
+  ..text("")
+  ..word(WordType.adjective)
+  ..text(" and ")
+  ..word(WordType.adjective)
+  ..text(", ")
+  ..word(WordType.other, "color")
+  ..text(" and ")
+  ..word(WordType.other, "color")
+  ..text(", bumble bee adults are ")
+  ..word(WordType.adjective)
+  ..text(" pollinators of a variety of ")
+  ..word(WordType.pluralNoun)
+  ..text(". Measuring from ")
+  ..word(WordType.number)
+  ..text(" to ")
+  ..word(WordType.number)
+  ..text(" ")
+  ..word(WordType.other, "unit of measure (plural)")
+  ..text(" in length, these ")
+  ..word(WordType.adjective)
+  ..text(" insects make a/an ")
+  ..word(WordType.adjective)
+  ..text(" ")
+  ..word(WordType.adjective)
+  ..text(" buzz as they ")
+  ..word(WordType.verb)
+  ..text(" somewhat ")
+  ..word(WordType.other, "adverb")
+  ..text(" from ")
+  ..word(WordType.noun)
+  ..text(" to \"")
+  ..copy(-1)
+  ..text("\". They are important ")
+  ..word(WordType.pluralNoun)
+  ..text(".\n\nBumble bees nest in ")
+  ..word(WordType.pluralNoun)
+  ..text(" or ")
+  ..word(WordType.adjective)
+  ..text(" litter where a single queen lays ")
+  ..word(WordType.number)
+  ..text(" to ")
+  ..word(WordType.number)
+  ..text(" eggs in spring. Though bumble bees make ")
+  ..word(WordType.other, "food")
+  ..text(", they make only enough to ")
+  ..word(WordType.verb)
+  ..text(" the colony.");

@@ -1,8 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-import 'story_select.dart';
+import 'pages/story_select.dart';
+import 'platform/link_handler.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MadLibsApp());
 }
 
@@ -13,6 +17,7 @@ class MadLibsApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Mad Libs',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.purple,
         colorScheme: ColorScheme.fromSwatch(
@@ -32,7 +37,7 @@ class MadLibsApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const StorySelectPage(),
+      home: const LinkHandler(child: StorySelectPage()),
     );
   }
 }

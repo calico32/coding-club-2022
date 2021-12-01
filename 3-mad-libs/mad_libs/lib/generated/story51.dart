@@ -1,0 +1,56 @@
+//
+// Generated file. Do not edit.
+//
+
+// ignore_for_file: lines_longer_than_80_chars
+
+import '../story.dart';
+import '../text.dart';
+
+StoryBuilder story51 = StoryBuilder()
+  ..title("Su Doku")
+  ..text("")
+  ..word(WordType.other, "place")
+  ..text(" - ")
+  ..word(WordType.other, "country")
+  ..text(" has a new addiction.\nHunched over newspapers on ")
+  ..word(WordType.other, "verb ending in \"ed\"")
+  ..text(" subway trains, sneaking secret peeks in the office, a puzzle-crazy nation is trying to slot ")
+  ..word(WordType.pluralNoun)
+  ..text(" into small checkerboard grids.\nIt's Sudoku - a sort of crossword without words that has ")
+  ..word(WordType.other, "verb ending in \"ed\"")
+  ..text(" the country.\n\"There's something about that grid with its empty squares - it's just ")
+  ..word(WordType.other, "verb ending in \"ing\"")
+  ..text(" out to be filled in,\" said Wayne Gould, a retired ")
+  ..word(WordType.other, "profession")
+  ..text(" and puzzle aficionado who helped spark \"")
+  ..copy(-6)
+  ..text("\"'s love affair with the ")
+  ..word(WordType.noun)
+  ..text(".\nA Japanese ")
+  ..word(WordType.noun)
+  ..text(" that has quietly appeared in puzzle magazines in Asia and North America for years, Sudoku hit \"")
+  ..copy(-9)
+  ..text("\" in the pages of The Times newspaper in ")
+  ..word(WordType.other, "month")
+  ..text(". It now has thousands of avid followers, a host of Web sites and books, and runs daily in ")
+  ..word(WordType.number)
+  ..text(" national newspapers, which compete ")
+  ..word(WordType.other, "adverb (ends in \"ly\")")
+  ..text(" to offer their readers the best puzzle.\nThe Times is offering a version for ")
+  ..word(WordType.pluralNoun)
+  ..text(". The Daily Telegraph promises a 3-D \"ultimate Sudoku\" version.\nThe name, which translates roughly as \"the number that is alone,\" has become a handy catch-phrase.\nSudoku consists of a grid of ")
+  ..word(WordType.number)
+  ..text(" rows of ")
+  ..word(WordType.number)
+  ..text(" boxes, which must be filled in so the numbers one through nine appear just once in each column, row and ")
+  ..word(WordType.number)
+  ..text("-by-")
+  ..word(WordType.number)
+  ..text(" ")
+  ..word(WordType.other, "shape")
+  ..text(".\nIt looks like ")
+  ..word(WordType.noun)
+  ..text(", but requires the application of ")
+  ..word(WordType.noun)
+  ..text(". It can be fairly straightforward or fiendishly difficult.");

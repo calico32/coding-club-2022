@@ -1,0 +1,56 @@
+//
+// Generated file. Do not edit.
+//
+
+// ignore_for_file: lines_longer_than_80_chars
+
+import '../story.dart';
+import '../text.dart';
+
+StoryBuilder story37 = StoryBuilder()
+  ..title("On Top of Old Smokey")
+  ..text("On top of spaghetti, \nAll covered with ")
+  ..word(WordType.other, "food")
+  ..text(", \nI lost my ")
+  ..word(WordType.adjective)
+  ..text(" ")
+  ..word(WordType.noun)
+  ..text("ball, \nWhen somebody ")
+  ..word(WordType.other, "verb ending in \"ed\"")
+  ..text(". \n \nIt rolled off the ")
+  ..word(WordType.other, "household item")
+  ..text(", \nAnd on to the floor, \nAnd then my \"")
+  ..copy(-4)
+  ..text("\" \"")
+  ..copy(-4)
+  ..text("\"ball, \nRolled out of the ")
+  ..word(WordType.other, "location")
+  ..text(". \n \nIt ")
+  ..word(WordType.other, "verb ending in \"ed\"")
+  ..text(" into the garden, \nAnd under a ")
+  ..word(WordType.other, "type of plant")
+  ..text(", \nAnd then my \"")
+  ..copy(-9)
+  ..text("\" \"")
+  ..copy(-9)
+  ..text("\"ball, \nWas nothing but mush. \n \nThe mush was as ")
+  ..word(WordType.adjective)
+  ..text(" \nAs \"")
+  ..copy(-1)
+  ..text("\" could be, \nAnd then the next ")
+  ..word(WordType.other, "measurement")
+  ..text(", \nIt ")
+  ..word(WordType.other, "verb ending in \"ed\"")
+  ..text(" into a tree. \n \nThe tree was all covered, \nAll covered with ")
+  ..word(WordType.other, "type of fabric")
+  ..text(", \nAnd on it grew \"")
+  ..copy(-15)
+  ..text("\"balls, \nAnd ")
+  ..word(WordType.other, "type of beverage")
+  ..text(". \n \nSo if you eat spaghetti, \nAll covered with \"")
+  ..copy(-19)
+  ..text("\", \nHold on to your \"")
+  ..copy(-18)
+  ..text("\"ball, \nWhenever you ")
+  ..word(WordType.verb)
+  ..text(".");

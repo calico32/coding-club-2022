@@ -1,0 +1,56 @@
+//
+// Generated file. Do not edit.
+//
+
+// ignore_for_file: lines_longer_than_80_chars
+
+import '../story.dart';
+import '../text.dart';
+
+StoryBuilder story137 = StoryBuilder()
+  ..title("Fraud Response")
+  ..text("Dear ")
+  ..word(WordType.name, "name of person in the room")
+  ..text(":\n\nThank you for your email regarding your ")
+  ..word(WordType.adjective)
+  ..text(" ")
+  ..word(WordType.noun)
+  ..text(" account.\n\nRight now, I ")
+  ..word(WordType.other, "adverb")
+  ..text(" want to inform you that I've received your inquiry about the unauthorized charges on your account. We have begun looking into this ")
+  ..word(WordType.noun)
+  ..text(" and will ")
+  ..word(WordType.verb)
+  ..text(" to you shortly to respond to your questions. Based upon our ")
+  ..word(WordType.other, "verb ending in \"ing\"")
+  ..text(", we will make any ")
+  ..word(WordType.adjective)
+  ..text(" ")
+  ..word(WordType.pluralNoun)
+  ..text(" to your account, and include them on your monthly ")
+  ..word(WordType.other, "verb ending in \"ing\"")
+  ..text(" statement.\n\nWe need you to contact our Customer ")
+  ..word(WordType.adjective)
+  ..text(" Operations Department ")
+  ..word(WordType.other, "adverb")
+  ..text(" at 1-")
+  ..word(WordType.number)
+  ..text(" for a ")
+  ..word(WordType.adjective)
+  ..text(" response to your inquiry.\n\nIf you have additional questions regarding your \"")
+  ..copy(-13)
+  ..text("\" \"")
+  ..copy(-13)
+  ..text("\" transactions, please e-mail us at www.\"")
+  ..copy(-14)
+  ..text("\"memberservices.com or call us at our toll free number 1-\"")
+  ..copy(-5)
+  ..text("\".\n\n")
+  ..word(WordType.other, "adverb")
+  ..text(",\n\n")
+  ..word(WordType.name, "name of another person in room")
+  ..text("\n\"")
+  ..copy(-18)
+  ..text("\" member Service ")
+  ..word(WordType.adjective)
+  ..text(" Support");
